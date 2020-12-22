@@ -30,3 +30,7 @@ def pretty_print(question):
 def get_question(questions, question_text):
     return next(q for q in questions if question_text in str(q))
 
+def get_questions_by_predicate(questions , pred):
+    def _type_pred(q, type='span'):
+        return q['answer'].get('type') == type
+    return [q for q in questions if pred(q)]
