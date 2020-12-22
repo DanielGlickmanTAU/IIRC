@@ -1,3 +1,10 @@
+answer types
+{'span': 593, 'none': 347, 'value': 233, 'binary': 128}
+
+ideas:
+entity resolved(NER?)
+
+
 question : Where was [the material that he suggested a substitute] for commonly imported from?
 links : Hemp
 answer : China
@@ -60,5 +67,3 @@ who are zenoni's teachers? for each one, when did he open school in turin?
 When did {zenoni teacher} open school in turin?
 
 
-ideas:
-entity resolved(NER?)
