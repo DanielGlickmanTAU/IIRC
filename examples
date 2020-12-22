@@ -2,7 +2,17 @@ answer types
 {'span': 593, 'none': 347, 'value': 233, 'binary': 128}
 
 ideas:
-entity resolved(NER?)
+* entity resolved(NER?)
+
+* instead of selecting fixed(top-k) context paragraphs, rank them and use one by one until
+confident in answer(and possibly keep context of previous paragraphs,
+i.e assuming ranked context paragraphs are p1,p2,p3,....pn and we have QA model(QA):
+ 1) [text|p1|0|q] -> QA model -> answer. confident in answer?done else go to 2
+ 2) [text|p2|lstm(p1)|q] -> QA model -> confident? done : go to 3
+ 3) [text|p2|lstm(p2+lstm(p1))|q] -> ...
+ that way we keep looking for a good paragraph while also not
+ completly forgetting previous paragraphs read(actually, this is probably not needed questions in this datasets, as one paragraph should be suffice to answer?)
+ lstm is just an example on how to it while keeping complexity linear with number of paragraphs.
 
 
 question : Where was [the material that he suggested a substitute] for commonly imported from?
