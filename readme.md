@@ -1,0 +1,83 @@
+answer types
+{'span': 593, 'none': 347, 'value': 233, 'binary': 128}
+
+#ideas:
+* entity resolved(NER?)
+
+* instead of selecting fixed(top-k) context paragraphs, rank them and use one by one until
+confident in answer(and possibly keep context of previous paragraphs,
+i.e assuming ranked context paragraphs are p1,p2,p3,....pn and we have QA model(QA):
+ 1) [text|p1|0|q] -> QA model -> answer. confident in answer?done else go to 2
+ 2) [text|p2|lstm(p1)|q] -> QA model -> confident? done : go to 3
+ 3) [text|p2|lstm(p2+lstm(p1))|q] -> ...
+ that way we keep looking for a good paragraph while also not
+ completly forgetting previous paragraphs read(actually, this is probably not needed questions in this datasets, as one paragraph should be suffice to answer?)
+ lstm is just an example on how to it while keeping complexity linear with number of paragraphs.
+
+
+#sub problems:
+only coreference
+only counting
+
+question : Where was [the material that he suggested a substitute] for commonly imported from?
+links : Hemp
+answer : China
+
+what he suggested subtite for? where is #1 located
+
+Where was Hemp commonly imported from?
+
+________________________________________________
+
+question : What other teams did [the veteran lefty reliever that Shairon Martis was traded for] play for?
+links : Mike Stanton (left-handed pitcher)
+answer : Atlanta Braves | Boston Red Sox | Texas Rangers | New York Yankees | New York Mets | Cincinnati Reds
+
+what lefty martis was traded for? where did #1 play
+
+What other teams did Mike stanton play for?
+
+-----------------------------
+
+question : How many copies were sold of the 2008 Adele album that Rumour Has It was compared to?
+links : 19 (Adele album)
+answer : 7 million
+
+what is the album? how much it sold?
+
+How many copies were sold of 19?
+
+
+-------------------------------
+question : Which of [the mentioned music video networks] has been around longer?
+links : MTV | VH1
+answer :  MTV
+
+what music video networks are mentioned? when each came? what is earlier?
+
+Which of MTV and VH1 has been around longer
+
+
+__________________________________________________
+question : In what country [did Zenoni receive further training with Boniforti]?
+links : Milan Conservatory
+answer : Milan
+
+where did zenoni reciver training with boniforti? what country is it?
+
+In what country Milan Conservatory
+_____________________________________
+question: 'When was [the school where Zenoni studied under  Carlo Boniforti] founded?'
+links : Milan Conservatory
+answer : 1807
+
+when was Milan Convervatory founded?
+
+_________
+question: 'When did [Zenoni\'s teacher] open a school in Turin?'
+
+who are zenoni's teachers? for each one, when did he open school in turin?
+
+When did {zenoni teacher} open school in turin?
+
+
